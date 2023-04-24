@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QList>
+#include <QMap>
 
 #include "DataModel/TranslateModel.h"
 

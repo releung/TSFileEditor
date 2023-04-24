@@ -24,7 +24,15 @@ private:
 
     QXmlStreamReader xml;
     QString m_tsFilePath;
-    QMap<QString, QString> m_translateMap;
+//    QMap<QString, QString> m_translateMap;
+
+    // <file, <ket, value>>
+//    QMultiHash<QString, QHash<QString, QString>> m_translateMap;
+    QMultiHash<QString, QList<QString>> m_translateMap;
+
+    QJsonArray  jsonArray;
+
+    QJsonObject rootObject;
 };
 
 #endif // XMLRW_H

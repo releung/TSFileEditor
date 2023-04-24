@@ -2,6 +2,8 @@
 #include <QRegExpValidator>
 #include <QFileInfo>
 
+#include "log.h"
+
 ExcelRW::ExcelRW(int keyColumn, int sourceColumn, int transColumn, QObject *parent) : QObject(parent)
 {
     m_TotalCount = 0;
@@ -81,7 +83,7 @@ bool ExcelRW::ImportFromXlsx(QList<TranslateModel> &list, QString strPath)
             model.SetKey(strKey);
             model.SetSource(strSource);
             model.SetTranslate(strTranslate);
-            list.append(model);
+            list.append(model);QLOG(i << strKey << strSource << strTranslate);
         }
     }while(0);
 

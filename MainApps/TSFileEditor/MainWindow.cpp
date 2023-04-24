@@ -9,6 +9,8 @@
 #include <QListView>
 #include <QSslSocket>
 
+#include "log.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -109,7 +111,7 @@ void MainWindow::on_generateBtn_clicked()
 }
 
 void MainWindow::on_tsUpdateBtn_clicked()
-{
+{QLOG(__PRETTY_FUNCTION__);
     bool re;
 
     m_pExcelWorker->SetTransColumn(ui->transSpinBox->value());
@@ -117,19 +119,19 @@ void MainWindow::on_tsUpdateBtn_clicked()
     //import excel file
     if(ui->excelPathEdit->text().isEmpty()) {
         on_excelLookBtn_clicked();
-    }
+    }QLOG(ui->excelPathEdit->text());
 
     re = m_pExcelWorker->ImportFromXlsx(m_transList, ui->excelPathEdit->text());
     if(re) {
-        onReceiveMsg("import excel file success");
+        onReceiveMsg("import excel file success");QLOG(ui->excelPathEdit->text());
         ui->youdaoTipLabel->setVisible(false);
     } else {
-        onReceiveMsg("import excel file failed");
-    }
+        onReceiveMsg("import excel file failed");QLOG(ui->excelPathEdit->text());
+    }QLOG(ui->excelPathEdit->text());
 
     //update ts file
     if(ui->tsPathEdit->text().isEmpty()) {
-        on_tsLookBtn_clicked();
+        on_tsLookBtn_clicked();QLOG(ui->excelPathEdit->text());
     }
 
     re = m_pXmlWorker->ExportToTS(m_transList, ui->tsPathEdit->text());
@@ -205,6 +207,7 @@ void MainWindow::on_tsImportBtn_clicked()
     }
 
     m_transList.clear();
+    QLOG(ui->tsPathEdit->text());
     re = m_pXmlWorker->ImportFromTS(m_transList, ui->tsPathEdit->text());
 
     if(re) {
@@ -303,7 +306,7 @@ void MainWindow::on_generateBtn_2_clicked()
 }
 
 void MainWindow::on_tsUpdateBtn_2_clicked()
-{
+{QLOG(__PRETTY_FUNCTION__);
     bool re;
 
     QFileInfo tsDirinfo(ui->tsDirEdit->text());
